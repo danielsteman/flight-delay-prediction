@@ -9,7 +9,12 @@ packages = [{include = "flight_delay_prediction"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 python-dotenv = "^1.0.0"
+httpx = "^0.24.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.3"
+pytest = "^7.4.0"
 
 [build-system]
 requires = ["poetry-core"]
