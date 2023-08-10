@@ -10,8 +10,8 @@ from pydantic import BaseModel
 
 
 class AircraftType(BaseModel):
-    iataMain: str
-    iataSub: str
+    iataMain: Optional[str]
+    iataSub: Optional[str]
 
 
 class BaggageClaim(BaseModel):
@@ -24,7 +24,7 @@ class CheckinClass(BaseModel):
 
 
 class Desk(BaseModel):
-    checkinClass: CheckinClass
+    checkinClass: Optional[CheckinClass]
     position: int
 
 
@@ -97,9 +97,9 @@ class Flight(BaseModel):
     id: str
     isOperationalFlight: bool
     mainFlight: str
-    prefixIATA: str
-    prefixICAO: str
-    airlineCode: int
+    prefixIATA: Optional[str]
+    prefixICAO: Optional[str]
+    airlineCode: Optional[int]
     publicEstimatedOffBlockTime: Optional[str]
     publicFlightState: PublicFlightState
     route: Route

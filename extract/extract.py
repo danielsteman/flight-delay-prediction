@@ -85,13 +85,12 @@ class FlightDataManager:
 
     def get_all_flights(self):
         flights_iterator = PaginatedRequestsIterator(
-            "flights?page=230", FlightsClient()
+            "flights?page=126", FlightsClient()
         )
 
-        flights = []
-        for flight_data in flights_iterator:
-            flights.append(flight_data)
-
-        for flight in flights:
-            obj = Flight(**flight)
-            logger.info(obj)
+        data = []
+        for page in flights_iterator:
+            flights = page["flights"]
+            for flight in flights:
+                data.append(flight)
+                Flight(**flight)
