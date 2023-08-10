@@ -37,3 +37,12 @@ datamodel-codegen --input-file-type dict --output models.py --target-python-vers
 ```
 
 I like using code generation tools for schemas because it's a less error prone method than doing it manually.
+
+## Contribute
+
+Install dependencies and `pre-commit` hooks, otherwise the CI will complain to you 😤.
+
+```
+poetry install
+pre-commit install
+```
