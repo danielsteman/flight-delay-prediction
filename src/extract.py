@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from logger import setup_logger
 from models import Flight
+from storage_manager import StorageManager
 
 load_dotenv()
 logger = setup_logger()
@@ -80,15 +81,24 @@ class PaginatedRequestsIterator:
 
 
 class FlightDataManager:
-    def __init__(self) -> None:
-        self.client = FlightsClient()
+    def __init__(
+        self, flights_client: FlightsClient, storage_client: StorageManager
+    ) -> None:
+        self.client = flights_client
+        self.storage_client = storage_client
+        self.data = []
 
-    def get_all_flights(self):
+    def get_all_flights(self) -> None:
         flights_iterator = PaginatedRequestsIterator("flights", FlightsClient())
 
-        data = []
         for page in flights_iterator:
             flights = page["flights"]
             for flight in flights:
-                data.append(Flight(**flight))
-        return data
+                self.data.append(Flight(**flight))
+        return self.data
+
+    def load(self) -> None:
+        return
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__} contains {len(self.data)} flights"
