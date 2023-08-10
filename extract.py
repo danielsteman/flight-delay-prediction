@@ -79,16 +79,16 @@ class PaginatedRequestsIterator:
         return url.removeprefix(PaginatedRequestsIterator.BASE_URL)
 
 
-# class FlightDataManager:
-#     def __init__(self) -> None:
-#         self.client = FlightsClient()
+class FlightDataManager:
+    def __init__(self) -> None:
+        self.client = FlightsClient()
 
 
-# flights_iterator = PaginatedRequestsIterator("flights?page=230", FlightsClient())
+flights_iterator = PaginatedRequestsIterator("flights?page=230", FlightsClient())
 
-# flights = []
-# for flight_data in flights_iterator:
-#     flights.append(flight_data)
+flights = []
+for flight_data in flights_iterator:
+    flights.append(flight_data)
 
-# for flight in flights:
-#     obj = Flight(**flights)
+for flight in flights:
+    obj = Flight(**flights)

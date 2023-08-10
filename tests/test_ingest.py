@@ -1,4 +1,4 @@
-from main import PaginatedRequestsIterator
+from extract import PaginatedRequestsIterator
 
 
 class TestPaginatedRequestsIterator:
