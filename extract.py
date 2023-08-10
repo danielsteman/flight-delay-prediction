@@ -84,11 +84,11 @@ class FlightDataManager:
         self.client = FlightsClient()
 
 
-flights_iterator = PaginatedRequestsIterator("flights?page=230", FlightsClient())
+# flights_iterator = PaginatedRequestsIterator("flights?page=230", FlightsClient())
 
-flights = []
-for flight_data in flights_iterator:
-    flights.append(flight_data)
+# flights = []
+# for flight_data in flights_iterator:
+#     flights.append(flight_data)
 
-for flight in flights:
-    obj = Flight(**flights)
+# for flight in flights:
+#     obj = Flight(**flights)
