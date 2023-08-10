@@ -1,11 +1,11 @@
-import json
 import os
+import time
 
 import httpx
 from dotenv import load_dotenv
+
 from logger import setup_logger
 from models import Flight
-import time
 
 load_dotenv()
 logger = setup_logger()
@@ -83,12 +83,15 @@ class FlightDataManager:
     def __init__(self) -> None:
         self.client = FlightsClient()
 
+    def get_all_flights(self):
+        flights_iterator = PaginatedRequestsIterator(
+            "flights?page=230", FlightsClient()
+        )
 
-# flights_iterator = PaginatedRequestsIterator("flights?page=230", FlightsClient())
+        flights = []
+        for flight_data in flights_iterator:
+            flights.append(flight_data)
 
-# flights = []
-# for flight_data in flights_iterator:
-#     flights.append(flight_data)
-
-# for flight in flights:
-#     obj = Flight(**flights)
+        for flight in flights:
+            obj = Flight(**flight)
+            logger.info(obj)
