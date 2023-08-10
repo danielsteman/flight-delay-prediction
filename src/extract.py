@@ -1,5 +1,6 @@
 import os
 import time
+from dataclasses import dataclass
 
 import httpx
 from dotenv import load_dotenv
@@ -80,6 +81,18 @@ class PaginatedRequestsIterator:
         return url.removeprefix(PaginatedRequestsIterator.BASE_URL)
 
 
+@dataclass
+class Stats:
+    n_downloaded: int
+    n_uploaded: int
+
+    def increment_downloads(self):
+        self.n_downloaded += 1
+
+    def increment_uploads(self):
+        self.n_uploaded += 1
+
+
 class FlightDataManager:
     def __init__(
         self, flights_client: FlightsClient, storage_client: StorageManager
@@ -87,6 +100,7 @@ class FlightDataManager:
         self.flights_client = flights_client
         self.storage_client = storage_client
         self.data = []
+        self.stats = Stats()
 
     def get_all_flights(self) -> None:
         flights_iterator = PaginatedRequestsIterator("flights", self.flights_client)
@@ -95,10 +109,18 @@ class FlightDataManager:
             flights = page["flights"]
             for flight in flights:
                 self.data.append(Flight(**flight))
+                self.stats.increment_downloads()
+
+        logger.info(f"Fetched {self.stats.n_downloaded} flights")
+
         return self.data
 
-    def load(self) -> None:
-        return
+    def upload_all(self) -> None:
+        for flight in self.data:
+            self.storage_client.upload(flight.json(), f"raw_flights/{flight.id}")
+            self.stats.increment_uploads()
+
+        logger.info(f"Stored {self.stats.n_uploaded} flights")
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__} contains {len(self.data)} flights"
+        return f"{self.__class__.__name__} with {len(self.data)} flights"

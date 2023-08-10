@@ -7,18 +7,20 @@ Flight delay prediction data engineering experiment.
 ### Extract
 
 - [ ] Extract flight data through the [Schiphol PublicFlight API](https://developer.schiphol.nl/apis/flight-api/v4/flights?version=latest)
+- [ ] Store in Google storage bucket
 
 ### Transform
 
+- [ ] Load from Google storage bucket
 - [ ] Find relevant features to predict flight delay
-
-### Load
-
-- [ ] Store train set on cloud storage
+- [ ] Store in Google storage bucket
 
 ### Machine learning
 
-- [ ] Create a simple model that predicts flight delay
+- [ ] Load train set from Google storage bucket
+- [ ] Train a simple model that predicts flight delay
+- [ ] Serialize and store model in Google storage bucket
+- [ ] Run inference service
 
 ## Docs
 
