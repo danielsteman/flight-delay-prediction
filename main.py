@@ -1,9 +1,10 @@
 import json
 import os
-from typing import Dict
 
 import httpx
 from dotenv import load_dotenv
+
+from models import Flights
 
 load_dotenv()
 
@@ -20,18 +21,7 @@ headers = {
 
 res = httpx.get(url, headers=headers)
 data = json.loads(res.content)
-
-
-def get_open_api_spec(to_path: str = "data/public-flights-v4.json") -> Dict:
-    openapi_spec_download_link = (
-        "https://developer.schiphol.nl/swagger/spec/public-flights-v4.json"
-    )
-    res = httpx.get(openapi_spec_download_link)
-    content = res.content
-    data = json.loads(content)
-    with open(to_path, "w") as file:
-        json.dump(data, file, indent=4)
-    return data
-
-
-get_open_api_spec()
+print(data)
+obj = Flights(**data)
+print(data["flights"][0])
+print(len(data["flights"][0]))
