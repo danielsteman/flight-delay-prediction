@@ -32,3 +32,6 @@ def get_open_api_spec(to_path: str = "data/public-flights-v4.json") -> Dict:
     with open(to_path, "w") as file:
         json.dump(data, file, indent=4)
     return data
+
+
+get_open_api_spec()

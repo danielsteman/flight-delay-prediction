@@ -15,3 +15,13 @@ Flight delay prediction data engineering experiment.
 ### Load
 
 - [ ] Store train set on cloud storage
+
+## Docs
+
+### Data models
+
+`pydantic` models are generated with `datamodel-codegen` based on the OpenAPI Swagger doc provided by Schiphol PublicFlight API.
+
+```
+datamodel-codegen --target-python-version 3.10 --url "https://developer.schiphol.nl/swagger/spec/public-flights-v4.json" --output models.py --use-title-as-name
+```

@@ -10,6 +10,8 @@ packages = [{include = "flight_delay_prediction"}]
 python = "^3.10"
 python-dotenv = "^1.0.0"
 httpx = "^0.24.1"
+datamodel-code-generator = {extras = ["http"], version = "^0.21.4"}
+pydantic = "^2.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
