@@ -16,6 +16,10 @@ Flight delay prediction data engineering experiment.
 
 - [ ] Store train set on cloud storage
 
+### Machine learning
+
+- [ ] Create a simple model that predicts flight delay
+
 ## Docs
 
 ### Data models
