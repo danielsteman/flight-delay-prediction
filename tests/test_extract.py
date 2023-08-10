@@ -1,4 +1,4 @@
-from extract.extract import FlightsClient, PaginatedRequestsIterator
+from src.extract import FlightsClient, PaginatedRequestsIterator
 
 
 class TestPaginatedRequestsIterator:
