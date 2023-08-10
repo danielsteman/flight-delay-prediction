@@ -22,6 +22,10 @@ Flight delay prediction data engineering experiment.
 
 ## Docs
 
+### Authentication
+
+The application uses a Google Storage Bucket and authenticates with a service account. Credentials are expected in .gcp-credentials/credentials.json.
+
 ### Data models
 
 `pydantic` models are generated with `datamodel-codegen` based on the OpenAPI Swagger doc provided by Schiphol PublicFlight API. `datamodel-codegen` can parse json directly through the download link of the [Swagger document](https://swagger.io/specification/).
