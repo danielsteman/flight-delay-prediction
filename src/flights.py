@@ -5,9 +5,9 @@ from dataclasses import dataclass
 import httpx
 from dotenv import load_dotenv
 
-from logger import setup_logger
-from models import Flight
-from storage_manager import StorageManager
+from src.logger import setup_logger
+from src.models import Flight
+from src.storage_manager import StorageManager
 
 load_dotenv()
 logger = setup_logger()
