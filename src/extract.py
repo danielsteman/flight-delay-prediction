@@ -84,12 +84,12 @@ class FlightDataManager:
     def __init__(
         self, flights_client: FlightsClient, storage_client: StorageManager
     ) -> None:
-        self.client = flights_client
+        self.flights_client = flights_client
         self.storage_client = storage_client
         self.data = []
 
     def get_all_flights(self) -> None:
-        flights_iterator = PaginatedRequestsIterator("flights", FlightsClient())
+        flights_iterator = PaginatedRequestsIterator("flights", self.flights_client)
 
         for page in flights_iterator:
             flights = page["flights"]
