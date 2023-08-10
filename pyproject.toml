@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "flight-delay-prediction"
+version = "0.1.0"
+description = ""
+authors = ["Daniel Steman <dst015@asr.nl>"]
+readme = "README.md"
+packages = [{include = "flight_delay_prediction"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
