@@ -1,5 +1,6 @@
 import json
 import os
+from io import BytesIO
 from typing import Dict
 
 import joblib
@@ -7,6 +8,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 
 from src.logger import setup_logger
+from src.stats import Stats
 from src.storage_manager import StorageManager
 from src.utils import filter_nested_dict
 
@@ -14,19 +16,24 @@ logger = setup_logger()
 
 
 class FlightTransformer:
-    def __init__(self, bucket: str) -> None:
+    def __init__(self, bucket: str, in_memory: bool = True) -> None:
         self.storage_manager = StorageManager(bucket)
-        self.get_data()
+        self.in_memory = in_memory
+        self.load_data()
+        self.stats = Stats()
 
-    def get_data(self) -> None:
+    def load_data(self) -> None:
         local_data_path = "data/raw_flights.joblib"
         if os.path.exists(local_data_path):
             self.data = joblib.load(local_data_path)
         else:
             self.data = self.manager.download_all("raw_flights")
-            self.manager.save_locally(self.data, "raw_flights")
+            if not self.in_memory:
+                self.manager.save_locally(self.data, "raw_flights")
 
-        logger.info(f"Number of flights in {self.__class__.__name__}: {len(self.data)}")
+        n = len(self.data)
+        self.stats.n_downloaded = n
+        logger.info(f"Number of flights in {self.__class__.__name__}: {n}")
 
     @classmethod
     def parse_and_extract(self, data: str) -> Dict:
@@ -83,3 +90,17 @@ class FlightTransformer:
         df["flightDirection"] = label_encoder.fit_transform(df["flightDirection"])
 
         return df
+
+    def upload(self, data: pd.DataFrame, path: str) -> None:
+        parquet_buffer = BytesIO()
+        data.to_parquet(parquet_buffer, index=False)
+        parquet_buffer.seek(0)
+        blob = self.storage_manager.client.blob(path)
+        blob.upload_from_file(parquet_buffer, content_type="application/octet-stream")
+        parquet_buffer.close()
+
+        self.stats.increment_uploads()
+        logger.info(f"Stored {self.stats.n_uploaded} flights")
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__} with {len(self.data)} flights"

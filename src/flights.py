@@ -1,12 +1,12 @@
 import os
 import time
-from dataclasses import dataclass
 
 import httpx
 from dotenv import load_dotenv
 
 from src.logger import setup_logger
 from src.models import Flight
+from src.stats import Stats
 from src.storage_manager import StorageManager
 
 load_dotenv()
@@ -79,18 +79,6 @@ class PaginatedRequestsIterator:
     @staticmethod
     def _remove_base(url: str) -> str:
         return url.removeprefix(PaginatedRequestsIterator.BASE_URL)
-
-
-@dataclass
-class Stats:
-    n_downloaded: int
-    n_uploaded: int
-
-    def increment_downloads(self):
-        self.n_downloaded += 1
-
-    def increment_uploads(self):
-        self.n_uploaded += 1
 
 
 class FlightDataManager:
