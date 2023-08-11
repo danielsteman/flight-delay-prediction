@@ -1,3 +1,6 @@
+# Serialized data
+**.joblib
+
 # GCP credentials
 .gcp-credentials/credentials.json
 

@@ -6,8 +6,8 @@ Flight delay prediction data engineering experiment.
 
 ### Extract
 
-- [ ] Extract flight data through the [Schiphol PublicFlight API](https://developer.schiphol.nl/apis/flight-api/v4/flights?version=latest)
-- [ ] Store in Google storage bucket
+- [x] Extract flight data through the [Schiphol PublicFlight API](https://developer.schiphol.nl/apis/flight-api/v4/flights?version=latest)
+- [x] Store in Google storage bucket
 
 ### Transform
 
@@ -25,6 +25,13 @@ Flight delay prediction data engineering experiment.
 ## Docs
 
 ### Authentication
+
+In development, you might want to add these [Schiphol PublicFlight API](https://developer.schiphol.nl/apis/flight-api/v4/flights?version=latest) credentials to `.env`. They also exist as Github secrets.
+
+```
+API_KEY
+API_ID
+```
 
 The application uses a Google Storage Bucket and authenticates with a service account. Credentials are expected in .gcp-credentials/credentials.json.
 
