@@ -19,8 +19,8 @@ class FlightTransformer:
     def __init__(self, bucket: str, in_memory: bool = True) -> None:
         self.storage_manager = StorageManager(bucket)
         self.in_memory = in_memory
-        self.load_data()
         self.stats = Stats()
+        self.load_data()
 
     def load_data(self) -> None:
         local_data_path = "data/raw_flights.joblib"

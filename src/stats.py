@@ -3,8 +3,8 @@ from dataclasses import dataclass
 
 @dataclass
 class Stats:
-    n_downloaded: int
-    n_uploaded: int
+    n_downloaded: int = 0
+    n_uploaded: int = 0
 
     def increment_downloads(self):
         self.n_downloaded += 1
