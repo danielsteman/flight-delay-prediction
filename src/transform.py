@@ -2,6 +2,7 @@ import json
 import os
 from io import BytesIO
 from typing import Dict
+from uuid import UUID, uuid4
 
 import joblib
 import pandas as pd
@@ -16,8 +17,14 @@ logger = setup_logger()
 
 
 class FlightTransformer:
-    def __init__(self, bucket: str, in_memory: bool = True) -> None:
+    def __init__(
+        self,
+        bucket: str,
+        experiment_id: UUID = uuid4(),
+        in_memory: bool = True,
+    ) -> None:
         self.storage_manager = StorageManager(bucket)
+        self.experiment_id = experiment_id
         self.in_memory = in_memory
         self.stats = Stats()
         self.load_data()
@@ -91,11 +98,15 @@ class FlightTransformer:
 
         return df
 
-    def upload(self, data: pd.DataFrame, path: str) -> None:
+    def upload(self, data: pd.DataFrame) -> None:
         parquet_buffer = BytesIO()
         data.to_parquet(parquet_buffer, index=False)
         parquet_buffer.seek(0)
+        path = f"{self.experiment_id}/train_set.parquet"
         blob = self.storage_manager.client.blob(path)
+
+        logger.info(f"Stored train_set in {path}")
+
         blob.upload_from_file(parquet_buffer, content_type="application/octet-stream")
         parquet_buffer.close()
 
