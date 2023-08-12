@@ -95,10 +95,16 @@ class FlightTransformer:
 
         label_encoder = LabelEncoder()
         df["flightDirection"] = label_encoder.fit_transform(df["flightDirection"])
+
         df["delay"] = df["scheduleDateTime"] - df["expectedTimeGateClosing"]
         df_cleaned = df.dropna(subset=["delay"])
+
         df_cleaned["delay_in_seconds"] = df_cleaned["delay"].apply(lambda x: x.seconds)
-        df_cleaned = df_cleaned.drop(columns=["delay"])
+        df_cleaned = df_cleaned.drop(
+            columns=["delay", "scheduleDateTime", "expectedTimeGateClosing"]
+        )
+        df_cleaned = df_cleaned.fillna(0)
+
         return df_cleaned
 
     def upload(self, data: pd.DataFrame) -> None:
