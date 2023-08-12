@@ -62,3 +62,11 @@ class FlightDelayModel:
         self.save_model(model)
 
         return model
+
+    def infer(self, X: pd.DataFrame) -> List[float]:
+        serialized_model = self.storage_manager.download(
+            f"experiments/experiment_{self.experiment_id}/flight_delay_model.joblib",
+            content_type=ContentType.STREAM,
+        )
+        model: BaseEstimator = joblib.load(serialized_model)
+        return model.predict(X)

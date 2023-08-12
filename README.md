@@ -18,8 +18,8 @@ Flight delay prediction data engineering experiment.
 ### Machine learning 🤖
 
 - [x] Load train set from Google storage bucket
-- [ ] Train a simple model that predicts flight delay
-- [ ] Serialize and store model in Google storage bucket
+- [x] Train a simple model that predicts flight delay
+- [x] Serialize and store model in Google storage bucket
 - [ ] Run inference service
 
 ## Docs
@@ -81,6 +81,7 @@ I like using code generation tools for schemas because it's a less error prone m
 ## Next steps ➡️
 
 - [ ] Refactor Poetry dependencies to make Docker images "leaner"
+- [ ] Create Airflow DAG(s) to schedule Docker containers and to automate extraction, transformation, loading and model training
 
 ## Contribute 🤝
 
