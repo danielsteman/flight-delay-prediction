@@ -33,7 +33,7 @@ API_KEY
 API_ID
 ```
 
-The application uses a Google Storage Bucket and authenticates with a service account. Credentials are expected in .gcp-credentials/credentials.json.
+The application uses a Google Storage Bucket and authenticates with a service account. Credentials are expected in `/gcp-credentials.json`.
 
 ### Data models
 
