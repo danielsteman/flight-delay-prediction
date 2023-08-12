@@ -1,6 +1,12 @@
+import os
+import sys
+
 import pytest
 
-from lib.flight_transformer import FlightTransformer
+# Append the repository root to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from lib.flight_transformer import FlightTransformer  # noqa: E402
 
 
 @pytest.fixture(scope="class")
