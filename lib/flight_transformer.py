@@ -95,23 +95,33 @@ class FlightTransformer:
 
         label_encoder = LabelEncoder()
         df["flightDirection"] = label_encoder.fit_transform(df["flightDirection"])
-
-        return df
+        df["delay"] = df["scheduleDateTime"] - df["expectedTimeGateClosing"]
+        df_cleaned = df.dropna(subset=["delay"])
+        df_cleaned["delay_in_seconds"] = df_cleaned["delay"].apply(lambda x: x.seconds)
+        df_cleaned = df_cleaned.drop(columns=["delay"])
+        return df_cleaned
 
     def upload(self, data: pd.DataFrame) -> None:
         parquet_buffer = BytesIO()
         data.to_parquet(parquet_buffer, index=False)
         parquet_buffer.seek(0)
-        path = f"experiment_{self.experiment_id}/train_set.parquet"
+        path = (
+            f"experiments/experiment_{self.experiment_id}/transformed_flights.parquet"
+        )
         blob = self.storage_manager.client.blob(path)
 
-        logger.info(f"Stored train_set in {path}")
+        logger.info(f"Stored data in {path}")
 
         blob.upload_from_file(parquet_buffer, content_type="application/octet-stream")
         parquet_buffer.close()
 
         self.stats.increment_uploads()
-        logger.info(f"Stored {self.stats.n_uploaded} flights")
+        logger.info(f"Stored {self.stats.n_uploaded} file(s)")
+        logger.info(f"Stored {self.n_flights} flights")
+
+    @property
+    def n_flights(self) -> int:
+        return len(self.data)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__} with {len(self.data)} flights"
+        return f"{self.__class__.__name__} with {self.n_flights} flights"

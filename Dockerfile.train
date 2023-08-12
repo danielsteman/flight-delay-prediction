@@ -1,0 +1,21 @@
+FROM python:3.10.0
+
+WORKDIR /app
+
+ENV ENVIRONMENT=production
+
+# In production, handle this with a secret manager
+
+COPY gcp-credentials.json /app/gcp-credentials.json
+
+COPY pyproject.toml poetry.lock /app/
+
+RUN pip install poetry
+
+RUN poetry config virtualenvs.create false && \
+  poetry install --no-interaction --no-ansi
+
+COPY lib lib
+COPY src src
+
+ENTRYPOINT ["python", "src/train.py"]
