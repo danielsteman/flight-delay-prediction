@@ -17,7 +17,7 @@ jobs:
         id: create-json
         uses: jsdaniell/create-json@1.1.2
         with:
-          name: ".gcp-credentials/credentials.json"
+          name: "/.gcp-credentials/credentials.json"
           json: ${{ secrets.GOOGLE_CREDENTIALS }}
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
