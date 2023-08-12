@@ -8,6 +8,7 @@ jobs:
     env:
       API_KEY: ${{ secrets.API_KEY }}
       API_ID: ${{ secrets.API_ID }}
+      GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
     strategy:
       matrix:
         python-version: ["3.10"]
@@ -15,7 +16,7 @@ jobs:
     steps:
       - name: Create GCP service account credentials
         run: |
-          echo ${{ secrets.GOOGLE_CREDENTIALS }} | base64 -d > .gcp-credentials/credentials.json
+          echo '$GOOGLE_CREDENTIALS' | base64 -d | jq > .gcp-credentials/credentials.json
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
