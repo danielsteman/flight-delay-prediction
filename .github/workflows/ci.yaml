@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Create GCP service account credentials
         run: |
-          echo '$GOOGLE_CREDENTIALS' | base64 -d | jq > credentials.json
+          echo '$GOOGLE_CREDENTIALS' | base64 -d | jq > gcp-credentials.json
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
