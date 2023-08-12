@@ -1,6 +1,6 @@
 import pytest
 
-from src.transform import FlightTransformer
+from lib.flight_transformer import FlightTransformer
 
 
 @pytest.fixture(scope="class")

@@ -1,4 +1,4 @@
-from src.flights import FlightsClient, PaginatedRequestsIterator
+from lib.flight_manager import FlightsClient, PaginatedRequestsIterator
 
 
 class TestPaginatedRequestsIterator:
