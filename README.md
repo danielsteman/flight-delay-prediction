@@ -43,12 +43,20 @@ Extract data:
 python src/extract
 ```
 
-Set an experiment ID and transform data:
+Set a random experiment ID and transform data:
 
 ```
 export EXPERIMENT_ID=$(python -c "import uuid; print(uuid.uuid4())")
 python src/transform.py --experiment-id $EXPERIMENT_ID
 ```
+
+Or set it to something meaningful such as the current commit hash:
+
+```
+export EXPERIMENT_ID=$(git rev-parse HEAD)
+```
+
+That way, an experiment can be correlated with the state of the code base.
 
 ### Build Docker images 📦
 
