@@ -90,5 +90,4 @@ Install dependencies and `pre-commit` hooks, otherwise the CI will complain to y
 ```
 poetry install
 pre-commit install
-
 ```
