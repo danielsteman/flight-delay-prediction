@@ -34,9 +34,9 @@ class FlightTransformer:
         if os.path.exists(local_data_path):
             self.data = joblib.load(local_data_path)
         else:
-            self.data = self.manager.download_all("raw_flights")
+            self.data = self.storage_manager.download_all("raw_flights")
             if self.cache_to_disk:
-                self.manager.save_locally(self.data, "raw_flights")
+                self.storage_manager.save_locally(self.data, "raw_flights")
 
         n = len(self.data)
         self.stats.n_downloaded = n
