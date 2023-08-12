@@ -13,13 +13,9 @@ jobs:
         python-version: ["3.10"]
 
     steps:
-      - name: create-json
-        id: create-json
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "credentials.json"
-          json: ${{ secrets.GOOGLE_CREDENTIALS }}
-          dir: ".gcp-credentials/"
+      - name: Create GCP service account credentials
+        run: |
+          echo ${{ secrets.GOOGLE_CREDENTIALS }} | base64 -d > .gcp-credentials/credentials.json
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
