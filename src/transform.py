@@ -21,11 +21,11 @@ class FlightTransformer:
         self,
         bucket: str,
         experiment_id: UUID = uuid4(),
-        in_memory: bool = True,
+        cache_to_disk: bool = False,
     ) -> None:
         self.storage_manager = StorageManager(bucket)
         self.experiment_id = experiment_id
-        self.in_memory = in_memory
+        self.cache_to_disk = cache_to_disk
         self.stats = Stats()
         self.load_data()
 
@@ -35,7 +35,7 @@ class FlightTransformer:
             self.data = joblib.load(local_data_path)
         else:
             self.data = self.manager.download_all("raw_flights")
-            if not self.in_memory:
+            if self.cache_to_disk:
                 self.manager.save_locally(self.data, "raw_flights")
 
         n = len(self.data)
