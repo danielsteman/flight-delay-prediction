@@ -42,7 +42,7 @@ The application uses a Google Storage Bucket and authenticates with a service ac
 Extract data:
 
 ```
-python src/extract
+python src/extract.py
 ```
 
 Set a random experiment ID and transform data:
