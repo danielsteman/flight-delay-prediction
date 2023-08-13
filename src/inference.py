@@ -30,7 +30,7 @@ model = FlightDelayModel("flight-delay-prediction", args.experiment_id)
 
 def parse_features(features):
     data = features.split(",")
-    int_data = [int(i) for i in data]
+    int_data = [float(i) for i in data]
     return [int_data]
 
 
