@@ -102,6 +102,8 @@ I like using code generation tools for schemas because it's a less error prone m
 
 ## Next steps ➡️
 
+- [ ] Add more tests
+- [ ] Build and push Docker images from CI pipeline
 - [ ] Refactor Poetry dependencies to make Docker images "leaner"
 - [ ] Create Docker base image
 - [ ] Expose an inference endpoint (with FastAPI for example)
