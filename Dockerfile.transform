@@ -1,4 +1,4 @@
-FROM python:3.10.0
+FROM python:3.10.6
 
 WORKDIR /app
 
@@ -13,9 +13,13 @@ COPY pyproject.toml poetry.lock /app/
 RUN pip install poetry
 
 RUN poetry config virtualenvs.create false && \
-  poetry install --no-interaction --no-ansi
+  poetry install --no-interaction --no-ansi --no-root
 
 COPY lib lib
 COPY src src
+
+# This is a workaround
+
+ENV PYTHONPATH="."
 
 ENTRYPOINT ["python", "src/transform.py"]

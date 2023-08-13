@@ -1,4 +1,4 @@
-FROM python:3.10.0
+FROM python:3.10.6
 
 WORKDIR /app
 
@@ -15,7 +15,11 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false && \
   poetry install --no-interaction --no-ansi --no-root
 
-COPY lib lib
-COPY src src
+COPY lib /app/lib
+COPY src /app/src
+
+# This is a workaround
+
+ENV PYTHONPATH="."
 
 ENTRYPOINT ["python", "src/extract.py"]

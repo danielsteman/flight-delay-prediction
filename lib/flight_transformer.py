@@ -105,6 +105,8 @@ class FlightTransformer:
         )
         df_cleaned = df_cleaned.fillna(0)
 
+        logger.info(f"Columns after tranformation: {df_cleaned.columns}")
+
         return df_cleaned
 
     def upload(self, data: pd.DataFrame) -> None:
