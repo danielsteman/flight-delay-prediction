@@ -28,7 +28,7 @@ This project is divided into distinct phases: fetching flight data from a public
 
 ### Authentication 🔒
 
-In development, you might want to add these [Schiphol PublicFlight API](https://developer.schiphol.nl/apis/flight-api/v4/flights?version=latest) credentials to `.env`. They also exist as Github secrets.
+In development, you need to add these [Schiphol PublicFlight API](https://developer.schiphol.nl/apis/flight-api/v4/flights?version=latest) credentials to `.env`. They also exist as Github secrets.
 
 ```
 API_KEY
