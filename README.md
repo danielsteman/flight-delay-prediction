@@ -58,6 +58,12 @@ Use the same experiment ID to train the model on the data you just transformed:
 python src/train.py --experiment-id $EXPERIMENT_ID
 ```
 
+Pass new flight data to the newly trained model:
+
+```
+python src/inference.py --experiment-id $EXPERIMENT_ID --features 1,1,1,1,1
+```
+
 ### Build Docker images 📦
 
 Secrets need to be passed at runtime. Although it's possible to pass them at build time, this seemed safer and provides flexibility. Something like HashiCorp Vault's "secrets injection" is the real solution here.
