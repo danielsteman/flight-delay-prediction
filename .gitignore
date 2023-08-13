@@ -2,7 +2,7 @@
 **.joblib
 
 # GCP credentials
-gcp-credentials.json
+# gcp-credentials.json
 
 # Ruff
 .ruff_cache
