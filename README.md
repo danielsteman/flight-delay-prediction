@@ -62,6 +62,7 @@ Pass new flight data to the newly trained model:
 
 ```
 python src/inference.py --experiment-id $EXPERIMENT_ID --features 1,1,1,1,1
+>>> Predicted flight delay in seconds: [889.9810475]
 ```
 
 ### Build Docker images 📦
