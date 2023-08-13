@@ -106,7 +106,7 @@ I like using code generation tools for schemas because it's a less error prone m
 - [ ] Build and push Docker images from CI pipeline
 - [ ] Refactor Poetry dependencies to make Docker images "leaner"
 - [ ] Create Docker base image
-- [ ] Expose an inference endpoint (with FastAPI for example)
+- [ ] Expose an inference endpoint (with FastAPI for example) such that it can be integrated in other business processes
 - [ ] Create Airflow DAG(s) to schedule Docker containers and to automate extraction, transformation, loading and model training
 - [ ] Integrate a tool for secrets injection (such as [HashiCorp Vault](https://www.vaultproject.io/))
 
