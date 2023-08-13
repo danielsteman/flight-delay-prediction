@@ -33,6 +33,7 @@ class FlightsClient(httpx.Client):
         kwargs["headers"] = merged_headers
         attempts = 0
         while attempts <= self.retries:
+            attempts += 1
             res = super().request(method, f"{self.base_url}{endpoint}", *args, **kwargs)
             if res.status_code == 429:
                 retry_after = float(res.headers.get("Retry-After", 0.5))
